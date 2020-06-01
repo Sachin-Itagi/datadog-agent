@@ -45,7 +45,9 @@
  cd $GOPATH/src/github.com/DataDog/datadog-agent
  export PATH=$PATH:/$GOPATH/bin
  pip install -r requirements.txt 
- sudo invoke deps 
- sudo invoke agent.build --build-exclude=systemd
+ python3 --version
+ invoke --list
+ invoke deps 
+ invoke agent.build --build-exclude=systemd
  go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
  sudo invoke  -e test --build-exclude=systemd --python-runtimes 3 --coverage --race --profile --fail-on-fmt --cpus 3
