@@ -20,7 +20,7 @@
  WORKDIR=`pwd`
 
  # Install all dependencies
- sudo yum install -y wget git python36 python36-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
+ sudo yum install -y wget git python3 python3-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
  
  wget https://dl.google.com/go/go1.13.5.linux-ppc64le.tar.gz 
  sudo tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
