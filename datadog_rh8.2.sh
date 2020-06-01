@@ -20,10 +20,10 @@
  WORKDIR=`pwd`
 
  # Install all dependencies
- yum install -y wget git python36 python36-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
+ sudo yum install -y wget git python36 python36-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
  
  wget https://dl.google.com/go/go1.13.5.linux-ppc64le.tar.gz 
- tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
+ sudo tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
  rm -rf go1.13.5.linux-ppc64le.tar.gz
  export PATH=$PATH:/usr/local/go/bin 
  export GOPATH=/root/go 
@@ -35,9 +35,9 @@
  tar xzf cmake-3.16.4.tar.gz
  rm -rf  cmake-3.16.4.tar.gz
  cd cmake-3.16.4 
- ./bootstrap 
- make 
- make install 
+ sudo ./bootstrap 
+ sudo make 
+ sudo make install 
  cmake --version
 
  # Clone datadog-agent, build and execute unit tests
@@ -45,7 +45,7 @@
  cd $GOPATH/src/github.com/DataDog/datadog-agent
  export PATH=$PATH:/$GOPATH/bin
  pip install -r requirements.txt 
- invoke deps 
- invoke agent.build --build-exclude=systemd
+ sudo invoke deps 
+ sudo invoke agent.build --build-exclude=systemd
  go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
- invoke  -e test --build-exclude=systemd --python-runtimes 3 --coverage --race --profile --fail-on-fmt --cpus 3
+ sudo invoke  -e test --build-exclude=systemd --python-runtimes 3 --coverage --race --profile --fail-on-fmt --cpus 3
