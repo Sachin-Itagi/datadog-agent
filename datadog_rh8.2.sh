@@ -22,8 +22,13 @@
  # Install all dependencies
  echo "Time to search python"
  yum search python
- sudo yum install -y wget git python3 python3-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
- 
+ sudo yum install -y wget git python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
+ wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
+ tar xzf Python-3.7.7.tgz
+ cd Python-3.7.7
+ ./configure --enable-optimizations
+ make altinstall
+ python3 --version
  wget https://dl.google.com/go/go1.13.5.linux-ppc64le.tar.gz 
  sudo tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
  rm -rf go1.13.5.linux-ppc64le.tar.gz
@@ -47,7 +52,6 @@
  cd $GOPATH/src/github.com/DataDog/datadog-agent
  export PATH=$PATH:/$GOPATH/bin
  pip install -r requirements.txt 
- python3 --version
  invoke --list
  invoke deps 
  invoke agent.build --build-exclude=systemd
