@@ -50,7 +50,7 @@
  git clone https://github.com/DataDog/datadog-agent.git $GOPATH/src/github.com/DataDog/datadog-agent
  cd $GOPATH/src/github.com/DataDog/datadog-agent
  export PATH=$PATH:/$GOPATH/bin
- pip install -r requirements.txt 
+ python3.7 -m pip install -r requirements.txt 
  echo "Installing Python Dependencies"
  invoke deps 
  echo "Building Datadog-agent"
