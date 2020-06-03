@@ -20,7 +20,7 @@
  WORKDIR=`pwd`
 
  # Install all dependencies
- sudo yum install -y wget git python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
+ sudo yum install -y wget git python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils libffi-devel
  wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
  tar xzf Python-3.7.7.tgz
  cd Python-3.7.7
