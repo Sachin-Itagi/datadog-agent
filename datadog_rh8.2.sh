@@ -20,22 +20,21 @@
  WORKDIR=`pwd`
 
  # Install all dependencies
- echo "Time to search python"
- yum search python
  sudo yum install -y wget git python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
  wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
  tar xzf Python-3.7.7.tgz
  cd Python-3.7.7
  ./configure --enable-optimizations
  make altinstall
- python3 --version
+ echo "Version of Python"
+ python3.7 --version
  wget https://dl.google.com/go/go1.13.5.linux-ppc64le.tar.gz 
  sudo tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
  rm -rf go1.13.5.linux-ppc64le.tar.gz
  export PATH=$PATH:/usr/local/go/bin 
  export GOPATH=/root/go 
  go version
- python3 -m pip install --upgrade pip 
+ python3.7 -m pip install --upgrade pip 
  
  # Compile and Install cmake 
  wget http://www.cmake.org/files/v3.16/cmake-3.16.4.tar.gz 
