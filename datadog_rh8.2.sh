@@ -1,4 +1,4 @@
-# ----------------------------------------------------------------------------
+ # ----------------------------------------------------------------------------
  #
  # Package        : Datadog-Agent
  # Version        : 7.21.0
@@ -20,42 +20,32 @@
  WORKDIR=`pwd`
 
  # Install all dependencies
- sudo yum install -y wget git python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils libffi-devel binutils bzip2-devel
- wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz
- tar xzf Python-3.8.3.tgz
- cd Python-3.8.3
- ./configure --enable-optimizations
- make altinstall
- echo "Version of Python"
- python3.8 --version
+ yum install -y wget git python36 python36-devel python38 python38-devel openssl openssl-devel make gcc gcc-c++ diffutils
+ 
  wget https://dl.google.com/go/go1.13.5.linux-ppc64le.tar.gz 
- sudo tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
+ tar -C /usr/local -xzf go1.13.5.linux-ppc64le.tar.gz 
  rm -rf go1.13.5.linux-ppc64le.tar.gz
  export PATH=$PATH:/usr/local/go/bin 
  export GOPATH=/root/go 
  go version
- python3.8 -m pip install --upgrade pip 
+ python3 -m pip install --upgrade pip 
  
  # Compile and Install cmake 
  wget http://www.cmake.org/files/v3.16/cmake-3.16.4.tar.gz 
  tar xzf cmake-3.16.4.tar.gz
  rm -rf  cmake-3.16.4.tar.gz
  cd cmake-3.16.4 
- sudo ./bootstrap 
- sudo make 
- sudo make install 
+ ./bootstrap 
+ make 
+ make install 
  cmake --version
 
  # Clone datadog-agent, build and execute unit tests
  git clone https://github.com/DataDog/datadog-agent.git $GOPATH/src/github.com/DataDog/datadog-agent
  cd $GOPATH/src/github.com/DataDog/datadog-agent
  export PATH=$PATH:/$GOPATH/bin
- python3.8 -m pip install -r requirements.txt 
- echo "Installing Python Dependencies"
+ pip install -r requirements.txt 
  invoke deps 
- echo "Building Datadog-agent"
  invoke agent.build --build-exclude=systemd
- echo "Installing golangci-lint"
  go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
- echo "Running Test Cases"
  invoke  -e test --build-exclude=systemd --python-runtimes 3 --coverage --race --profile --fail-on-fmt --cpus 3
